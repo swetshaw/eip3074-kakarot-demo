@@ -28,6 +28,10 @@ npm run start
 1. Connect the Authority Wallet to sign the authorisation
 2. Connect the Sponsor Wallet to invoke the transfer transaction on behalf of the Authority and pay the gas fees
 
+## Information
+The Invoker contract is deployed at `0x7969c5eD335650692Bc04293B07F5BF2e7A673C0` on the Kakarot Sepolia network.
+The ERC20 Token contract is deployed at `0x1429859428C0aBc9C2C47C8Ee9FBaf82cFA0F20f` on the Kakarot Sepolia network.
+
 ## Disclaimer
 This is a simple demo to showcase the capabilities of EIP 3074. It is not production ready and should not be used as is in a production environment.
 
