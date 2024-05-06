@@ -18,11 +18,31 @@ In the context of this demo, we have 3 types of users:
 ```bash
 npm install
 ```
-3. Run the project
+3. Compile the contracts
+```bash
+docker run --rm \
+    -v $(pwd):/app/foundry \
+    -u $(id -u):$(id -g) \
+    ghcr.io/paradigmxyz/foundry-alphanet:latest \
+    --foundry-directory /app/foundry \
+    --foundry-command "forge build"
+```
+4. Deploy the contracts
+Replace `<PRIVATE_KEY>` with the private key of the wallet you want to deploy the contract from
+```bash
+docker run --rm \
+    -v $(pwd):/app/foundry \
+    -u $(id -u):$(id -g) \
+    ghcr.io/paradigmxyz/foundry-alphanet:latest \
+    --foundry-directory /app/foundry \
+    --foundry-command "forge create --rpc-url https://sepolia-rpc.kakarot.org/ --private-key <PRIVATE_KEY> src/contracts/GasSponsorInvoker.sol:GasSponsorInvoker"
+```
+5. You will see the contract address in the output. Update the `GAS_SPONSOR_INVOKER_CONTRACT_ADDRESS` in the `src/config.ts` file with the contract address
+6. Run the project
 ```bash
 npm run start
 ```
-4. Open the browser and navigate to `http://localhost:3000`
+7. Open the browser and navigate to `http://localhost:3000`
 
 ## Steps
 1. Connect the Authority Wallet to sign the authorisation
@@ -32,12 +52,6 @@ npm run start
 It uses the following contracts:
 1. GasSponsorInvoker: This contract is used to sponsor the gas fees for the Authority to execute the transaction
 2. ERC20 Token: This contract is used to transfer the tokens
-
-| Contract Name | Address | Network |
-| --- | --- | --- |
-| GasSponsorInvoker | 0x7969c5eD335650692Bc04293B07F5BF2e7A673C0 | Kakarot Sepolia |
-| ERC20 Token | 0x1429859428C0aBc9C2C47C8Ee9FBaf82cFA0F20f | Kakarot Sepolia |
-
 
 ## Disclaimer
 This is a simple demo to showcase the capabilities of EIP 3074. It is not production ready and should not be used as is in a production environment.
