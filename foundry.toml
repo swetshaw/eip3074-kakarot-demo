@@ -1,0 +1,10 @@
+[profile.default]
+src = "src/contracts"
+out = "out"
+libs = ["lib"]
+ffi = true
+prague = true
+
+
+[fmt]
+bracket_spacing = true
