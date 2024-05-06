@@ -18,6 +18,7 @@ import kkrt from "./kkrt.jpg";
 import "./App.css";
 import gasSponsorArtifact from "./abis/GasSponsorInvoker.json";
 import tokenArtifact from "./abis/ERC20.json";
+import {TOKEN_CONTRACT_ADDRESS, GAS_SPONSOR_INVOKER_CONTRACT_ADDRESS} from "./config";
 
 function App() {
   const [connected, setConnected] = useState(false);
@@ -40,9 +41,6 @@ function App() {
   const [signature, setSignature] = useState(""); // State to store the signature of the authority
   const toast = useToast();
 
-  const GAS_SPONSOR_INVOKER_CONTRACT_ADDRESS =
-    process.env.REACT_APP_GAS_SPONSOR_INVOKER_CONTRACT_ADDRESS;
-  const TOKEN_CONTRACT_ADDRESS = process.env.REACT_APP_TOKEN_CONTRACT_ADDRESS;
   const KAKAROT_RPC_URL = process.env.REACT_APP_KAKAROT_RPC_URL;
 
   const provider = new ethers.JsonRpcProvider(KAKAROT_RPC_URL!);
