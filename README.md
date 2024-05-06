@@ -1,46 +1,34 @@
-# Getting Started with Create React App
+# EIP 3074 end to end demo
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is a simple end to end demo of EIP 3074. It demonstrates how EIP 3074 can be used for sponsoring gas fees for users and executing transactions on behalf of them. In this demo we show how Authority can authorise invoker wallet to transfer ERC20 tokens on behalf of themselves.
 
-## Available Scripts
+In the context of this demo, we have 3 types of users:
+1. Sponsor: The user who is sponsoring the gas fees for another user
+2. Authority: The user who is authorising the token transfer on their behalf
+3. Receiver: The user who will receive the tokens
 
-In the project directory, you can run:
+## Prerequisites
+1. Add Kakarot Sepolia to MetaMask
+2. Get test ETH from the Kakarot Faucet to Sponsor's account
 
-### `npm start`
+## Setup
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+1. Clone the repository
+2. Install dependencies
+```bash
+npm install
+```
+3. Run the project
+```bash
+npm run start
+```
+4. Open the browser and navigate to `http://localhost:3000`
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## Steps
+1. Connect the Authority Wallet to sign the authorisation
+2. Connect the Sponsor Wallet to invoke the transfer transaction on behalf of the Authority and pay the gas fees
 
-### `npm test`
+## Disclaimer
+This is a simple demo to showcase the capabilities of EIP 3074. It is not production ready and should not be used as is in a production environment.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+Also, it uses `eth_sign` to sign the authorisation message. This is not a secure way to sign messages and should not be used in production. Use a secure way to sign messages in production.
