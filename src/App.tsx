@@ -18,7 +18,7 @@ import kkrt from "./kkrt.jpg";
 import "./App.css";
 import gasSponsorArtifact from "./abis/GasSponsorInvoker.json";
 import tokenArtifact from "./abis/ERC20.json";
-import {TOKEN_CONTRACT_ADDRESS, GAS_SPONSOR_INVOKER_CONTRACT_ADDRESS} from "./config";
+import { TOKEN_CONTRACT_ADDRESS, GAS_SPONSOR_INVOKER_CONTRACT_ADDRESS, KAKAROT_RPC_URL } from "./config";
 
 function App() {
   const [connected, setConnected] = useState(false);
@@ -37,13 +37,12 @@ function App() {
   const [receiverAddress, setReceiverAddress] = useState("");
   const [transferAmount, setTransferAmount] = useState("0");
   const [invokeSuccessful, setInvokeSuccessful] = useState(false);
+  const [transactionHash, setTransactionHash] = useState("")
 
   const [signature, setSignature] = useState(""); // State to store the signature of the authority
   const toast = useToast();
 
-  const KAKAROT_RPC_URL = process.env.REACT_APP_KAKAROT_RPC_URL;
-
-  const provider = new ethers.JsonRpcProvider(KAKAROT_RPC_URL!);
+  const provider = new ethers.JsonRpcProvider(KAKAROT_RPC_URL);
 
   const tokenContract = new ethers.Contract(
     TOKEN_CONTRACT_ADDRESS!,
@@ -189,6 +188,7 @@ function App() {
       );
 
       console.log("Tx", tx);
+      setTransactionHash(tx.hash);
 
       const receipt = await tx.wait();
       console.log("Tx receipt", receipt);
@@ -231,6 +231,12 @@ function App() {
       console.log("Tx:", tx);
       const receipt = await tx.wait();
       console.log("Receipt:", receipt);
+
+      const tokenBalance = await tokenContract.balanceOf(signer.address);
+      console.log("Token balance:", tokenBalance);
+      setConnectedWalletTokenBalance(
+        Number(ethers.formatEther(tokenBalance)).toFixed(0),
+      );
 
       toast({
         title: "Tokens minted successfully.",
@@ -277,6 +283,7 @@ function App() {
     }
 
     fetchBalances();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [connected, receiverAddress, invokeSuccessful]);
 
   return (
@@ -388,6 +395,9 @@ function App() {
                   <b>Receiver Balance: {receiverBalance} KKRT </b> (Before{" "}
                   {receiverBalanceBefore}){" "}
                 </Text>
+                <a href={`https://sepolia.kakarotscan.org/tx/${transactionHash}`}>
+                 <Text decoration="underline"> View Transaction on Kakarot Explorer </Text>
+                </a>
                 <Button colorScheme="blue" onClick={reset} mt="4">
                   Reset
                 </Button>

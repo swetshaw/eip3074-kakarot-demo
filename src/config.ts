@@ -1,3 +1,3 @@
-export const GAS_SPONSOR_INVOKER_CONTRACT_ADDRESS = ""
+export const GAS_SPONSOR_INVOKER_CONTRACT_ADDRESS = "0x922D6956C99E12DFeB3224DEA977D0939758A1Fe"
 export const TOKEN_CONTRACT_ADDRESS = "0x1429859428C0aBc9C2C47C8Ee9FBaf82cFA0F20f"
-export const REACT_APP_KAKAROT_RPC_URL="https://sepolia-rpc.kakarot.org/"
+export const KAKAROT_RPC_URL="https://sepolia-rpc.kakarot.org/"
